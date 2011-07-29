@@ -29,7 +29,7 @@ class TagDetectorTests(unittest.TestCase):
             self.calculator.calculate(tags, text)
 
             foundTags = self.detector.detect("Hello wonderful world!")
-            foundTagsNames = [tag.get('name') for tag in foundTags]
+            foundTagsNames = [tag.name for tag in foundTags]
 
             self.assertEqual(tags, foundTagsNames)
         finally:
@@ -42,7 +42,7 @@ class TagDetectorTests(unittest.TestCase):
             self.calculator.calculate(tags, text)
 
             foundTags = self.detector.detect("Hello wonderful world!")
-            foundTagsNames = [tag.get('name') for tag in foundTags]
+            foundTagsNames = [tag.name for tag in foundTags]
 
             self.assertEqual(tags, foundTagsNames)
         finally:

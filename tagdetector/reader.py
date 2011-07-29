@@ -6,7 +6,7 @@ class TextReader:
     STOP_WORDS = ['a', 'the', 'where', 'why', 'by', 'for', 'then', 'than', 'has', 'of', 'and', 'or', 'in', 'out',
                   'would', 'will', 'have', 'is', 'are', 'that', 'this', 'there', 'here', 'when', 'while',
                   'an', 'into', 'other', 'we', 'i', 've', 'they', 'he', 'she', 'be', 'to', 'how', 'not',
-                  'my', 'your', 'you', 'their', 'his', 'her', 'none']
+                  'my', 'your', 'you', 'their', 'his', 'her', 'none', 'so', 'it']
 
     def __init__(self):
         pass

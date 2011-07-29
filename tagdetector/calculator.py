@@ -54,9 +54,8 @@ class TagCalculator:
     def calculate_tag_words_part(self, words):
         totalCount = 0
         for word in words:
-            if word.count > 1:
-                totalCount += word.count
+            totalCount += word.count
 
-        for word in words:
-            if word.count > 1:
+        if totalCount:
+            for word in words:
                 word.part = float(word.count) / totalCount

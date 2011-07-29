@@ -54,15 +54,15 @@ class TagCalculatorTests(unittest.TestCase):
             for word in words:
                 if word.word == 'hello':
                     self.assertEqual(2, word.count)
-                    self.assertEqual(float(2.0/5), word.part)
+                    self.assertEqual(float(2.0/8), word.part)
                     foundHello = True
                 if word.word == 'world':
                     self.assertEqual(3, word.count)
-                    self.assertEqual(3.0/5, word.part)
+                    self.assertEqual(3.0/8, word.part)
                     foundWorld = True
                 if word.word == 'nice':
                     self.assertEqual(1, word.count)
-                    self.assertEqual(0.0, word.part)
+                    self.assertEqual(1.0/8, word.part)
                     foundNice = True
 
             self.assertTrue(foundHello, 'Hello is not found')
