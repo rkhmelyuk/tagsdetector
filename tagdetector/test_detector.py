@@ -1,5 +1,5 @@
 import unittest
-from tagdetector.calculator import TagCalculator
+from tagdetector.calculator import TagStudy
 from tagdetector.detector import TagDetector
 from tagdetector.reader import TextReader
 from tagdetector.storage.mongo import MongoConnection
@@ -12,7 +12,7 @@ class TagDetectorTests(unittest.TestCase):
         self.storage = Storage(mongoConn)
         reader = TextReader()
 
-        self.calculator = TagCalculator(self.storage, reader)
+        self.calculator = TagStudy(self.storage, reader)
         self.detector = TagDetector(self.storage, reader)
 
     def tearDown(self):
@@ -26,7 +26,7 @@ class TagDetectorTests(unittest.TestCase):
         try:
             tags = ('tag1',)
             text = 'Hello my World'
-            self.calculator.calculate(tags, text)
+            self.calculator.learn(tags, text)
 
             foundTags = self.detector.detect('Hello wonderful world!')
             foundTagsNames = [tag.name for tag in foundTags]
@@ -39,7 +39,7 @@ class TagDetectorTests(unittest.TestCase):
         try:
             tags = ('tag1', 'tag2')
             text = 'Hello my World'
-            self.calculator.calculate(tags, text)
+            self.calculator.learn(tags, text)
 
             foundTags = self.detector.detect('Hello wonderful world!')
             foundTagsNames = [tag.name for tag in foundTags]
@@ -53,15 +53,15 @@ class TagDetectorTests(unittest.TestCase):
         try:
             tags = ('tag1', 'tag2')
             text = 'Hello my World'
-            self.calculator.calculate(tags, text)
+            self.calculator.learn(tags, text)
 
             tags = ('tag2', 'tag3')
             text = 'Hello John!'
-            self.calculator.calculate(tags, text)
+            self.calculator.learn(tags, text)
 
             tags = ('tag2',)
             text = 'Hello Ruslan! How are you today?'
-            self.calculator.calculate(tags, text)
+            self.calculator.learn(tags, text)
 
             foundTags = self.detector.detect('Hello Ruslan!')
             foundTagsNames = [tag.name for tag in foundTags]
