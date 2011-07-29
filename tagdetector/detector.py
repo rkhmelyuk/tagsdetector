@@ -19,8 +19,7 @@ class TagDetector:
         tags = [TagPart(tag.get("name"), tag.get("part"))
                 for tag in tags if tag.get("part") > minPart]
 
-        tags.sort()
-        tags.reverse()
+        tags.sort(reverse=True)
 
         print [str(tag) for tag in tags]
 

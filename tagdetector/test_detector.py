@@ -19,35 +19,59 @@ class TagDetectorTests(unittest.TestCase):
         self.detector = None
 
     def test_no_text(self):
-        tags = self.detector.detect("")
+        tags = self.detector.detect('')
         self.assertEqual([], tags, 'Should be empty')
 
     def test_simple_text_single_tag(self):
         try:
-            tags = ['tag1']
+            tags = ('tag1',)
             text = 'Hello my World'
             self.calculator.calculate(tags, text)
 
-            foundTags = self.detector.detect("Hello wonderful world!")
+            foundTags = self.detector.detect('Hello wonderful world!')
             foundTagsNames = [tag.name for tag in foundTags]
 
-            self.assertEqual(tags, foundTagsNames)
+            self.assertEqual(tags, tuple(foundTagsNames))
         finally:
-            self.storage.remove_tag("tag1")
+            self.storage.remove_tag('tag1')
 
     def test_simple_text_two_tags(self):
         try:
-            tags = ['tag1', 'tag2']
+            tags = ('tag1', 'tag2')
             text = 'Hello my World'
             self.calculator.calculate(tags, text)
 
-            foundTags = self.detector.detect("Hello wonderful world!")
+            foundTags = self.detector.detect('Hello wonderful world!')
             foundTagsNames = [tag.name for tag in foundTags]
 
-            self.assertEqual(tags, foundTagsNames)
+            self.assertEqual(('tag1', 'tag2'), tuple(foundTagsNames))
         finally:
-            self.storage.remove_tag("tag1")
-            self.storage.remove_tag("tag2")
+            self.storage.remove_tag('tag1')
+            self.storage.remove_tag('tag2')
 
-if __name__ == "__main__":
+    def test_two_texts(self):
+        try:
+            tags = ('tag1', 'tag2')
+            text = 'Hello my World'
+            self.calculator.calculate(tags, text)
+
+            tags = ('tag2', 'tag3')
+            text = 'Hello John!'
+            self.calculator.calculate(tags, text)
+
+            tags = ('tag2',)
+            text = 'Hello Ruslan! How are you today?'
+            self.calculator.calculate(tags, text)
+
+            foundTags = self.detector.detect('Hello Ruslan!')
+            foundTagsNames = [tag.name for tag in foundTags]
+
+            self.assertEqual(('tag2', 'tag1', 'tag3'), tuple(foundTagsNames))
+        finally:
+            self.storage.remove_tag('tag1')
+            self.storage.remove_tag('tag2')
+            self.storage.remove_tag('tag3')
+            
+
+if __name__ == '__main__':
     unittest.main()

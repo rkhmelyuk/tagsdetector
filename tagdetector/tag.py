@@ -9,22 +9,22 @@ class TagPart:
         return self.name + "(" + str(self.part) + ")"
 
     def __eq__(self, other):
-        return self.name == other.name and self.part == other.v
+        return self.name == other.name and self.part == other.part
 
     def __ne__(self, other):
         return self.name != other.name or self.part != other.part
 
     def __le__(self, other):
-        return self.part <= other.part
+        return self.part <= other.part or self.name >= other.name
 
     def __ge__(self, other):
-        return self.part >= other.part
+        return self.part >= other.part or self.name <= other.name
 
     def __lt__(self, other):
-        return self.part < other.part
+        return self.part < other.part or self.name > other.name
 
     def __gt__(self, other):
-        return self.part < other.part
+        return self.part > other.part or self.name < other.name
 
 
 class TagWord:
@@ -53,4 +53,4 @@ class TagWord:
         return self.count < other.count
 
     def __gt__(self, other):
-        return self.count < other.count
+        return self.count > other.count

@@ -23,9 +23,9 @@ class TextReaderTests(unittest.TestCase):
         onlyWords = [word.word for word in words]
 
         self.assertEquals(len(words), 6)
-        self.assert_contains_words(onlyWords)
+        self.check_contains_words(onlyWords)
 
-    def assert_contains_words(self, onlyWords):
+    def check_contains_words(self, onlyWords):
         self.assertIn("hello", onlyWords)
         self.assertIn("ruslan", onlyWords)
         self.assertIn("shard", onlyWords)
@@ -33,20 +33,29 @@ class TextReaderTests(unittest.TestCase):
         self.assertIn("later", onlyWords)
         self.assertIn("orthopedics", onlyWords)
 
+    # -----------------------------------------------------------------
+
     def test_read_duplicates(self):
         text = "hello Hello HELLO hElLO master"
 
         words = self.reader.read(text)
-
         onlyWords = [word.word for word in words]
 
-        for word in words:
-            if word.word == "hello":
-                self.assertEqual(word.count, 4)
+        self.check_count_duplicates(onlyWords, words)
 
+    def check_count_duplicates(self, onlyWords, words):
+        self.assert_word_count(words, "hello", 4)
         self.assertEquals(len(words), 2)
         self.assertIn("hello", onlyWords)
         self.assertIn("master", onlyWords)
+
+    def assert_word_count(self, words, word, count):
+        for each in words:
+            if each.word == word:
+                self.assertEqual(each.count, count)
+                break
+        else:
+            self.fail("Word is not found")
 
 
 if __name__ == "__main__":

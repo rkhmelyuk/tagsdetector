@@ -1,5 +1,4 @@
 from tagdetector.tag import TagWord
-from tagdetector.utils import find
 
 class Storage:
 
@@ -16,6 +15,7 @@ class Storage:
 
     def get_tags_by_words(self, words):
         cursor = self.db.tagwords.find({'words.word': {"$in": words}})
+
         result = []
         for tag in cursor:
             part = self._calculate_tag_part(tag, words)
@@ -27,12 +27,12 @@ class Storage:
         return result
 
     def _calculate_tag_part(self, tag, words):
-        parts = 0
+        part = 0
         for tagWord in self._read_tag_words(tag):
             for word in words:
                 if tagWord.word == word:
-                    parts += tagWord.part
-        return parts
+                    part += tagWord.part
+        return part
 
 
     def remove_tag(self, tag):
