@@ -10,7 +10,7 @@ class TextReader:
                   'much', 'more', 'less', 'up', 'with', 'without', 'can', 'most', 'long', 'same', 'new', 'old',
                   'should', 'just', 'only', 'not', 'one', 'two', 'unit', 'till', 'if', 'worth', 'either', 'rather',
                   'else', 'something', 'someone', 'sometime', 'somewhere', 'who', 'where', 'what', 'often', 'well',
-                  'any', 'all', 'never', 'ever', '')
+                  'any', 'all', 'never', 'ever', 'which', 'were', 'was', 'will', 'shall')
 
     def __init__(self):
         pass
